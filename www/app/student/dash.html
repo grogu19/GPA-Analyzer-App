@@ -1,0 +1,45 @@
+<ion-view title="{{student.F_NAME}}" >
+  <ion-content class="has-header" ng-init="getSemGpaList()">
+    <ion-list>
+			
+  			
+			<ion-item ng-if="sem.length == 0">
+			<p>Student analytics unavailable.</p><p> Please add Semester to generate analytics!!</p>
+			</ion-item>
+			<ion-item>
+				
+				<div class="row">
+					<div class="col col-100" align="center">
+						<h2>Cumulative GPA</h2>
+	  					<h3>{{(cgpaList[0].QUALITY_POINTS/ cgpaList[0].TOT_CREDIT_HOURS) | number:2}}</h3>
+	  				</div>
+	  					
+	  			</div>
+			</ion-item>
+			<label>
+			 <div class="item item-divider" align="center">
+			 	<h2>Semester GPA</h2>			 	
+			 </div>
+
+			</label>
+			<ion-item ng-repeat="s in gpaList" item="item" item-type="item item-icon-left">
+				<div class="row">
+					<div class="col col-50" align="left">
+	  					{{ s.SEM_NAME}}
+	  				</div>
+	  				
+	  				<div class="col col-33" align="center"
+	  					ng-if ="!((s.QUALITY_POINTS/ s.TOT_CREDIT_HOURS) >= 0)">
+	  					Add deliverables
+	  				</div>
+
+	  				<div class="col col-33" align="center" ng-if ="((s.QUALITY_POINTS/ s.TOT_CREDIT_HOURS) >= 0)">
+	  					{{(s.QUALITY_POINTS/ s.TOT_CREDIT_HOURS) | number:2}}
+	  				</div>
+
+	  			</div>
+	  			
+			</ion-item>
+		</ion-list>
+  </ion-content>
+</ion-view>

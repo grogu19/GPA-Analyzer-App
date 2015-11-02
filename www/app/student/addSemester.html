@@ -1,0 +1,25 @@
+<ion-modal-view>
+    <ion-header-bar class="bar bar-header bar-calm">
+      <h1 class="title">Add Semester</h1>
+      <button class="button button-clear icon ion-close-round" ng-click="closeModal()"></button>
+    </ion-header-bar>
+    <ion-content class="modal-body">
+    <form name="semForm" ng-controller="studDetailCtrl" ng-submit="addSem(sem)" novalidate>
+      <div class="list">
+        <label class="item item-radio">
+          <span class="input-label">Session:</span>
+          <ion-radio ng-model="sem.session" ng-value="'SPRING'">Spring</ion-radio>
+          <ion-radio ng-model="sem.session" ng-value="'SUMMER'">Summer</ion-radio>
+          <ion-radio ng-model="sem.session" ng-value="'FALL'">Fall</ion-radio>
+          
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Year</span>
+          <input type="month" ng-model="sem.year">
+        </label>
+      </div>
+
+      <button class="button button-full button-energized" type="submit">Done</button>
+      </form>
+    </ion-content>
+  </ion-modal-view>

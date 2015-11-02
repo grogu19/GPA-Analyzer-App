@@ -1,0 +1,131 @@
+<ion-modal-view>
+    <ion-header-bar class="bar bar-header bar-calm">
+      <h1 class="title">Add Course</h1>
+      <button class="button button-clear icon ion-close-round" ng-click="closeCourseModal()"></button>
+    </ion-header-bar>
+
+    <ion-content class="modal-body">
+<form name="courseForm" ng-controller="courseCtrl" ng-submit="addCourses(course)" novalidate>
+  <div class="list list-inset">
+  <div class="item item-divider">
+    Course Details
+   <!--  <div class="buttons">
+        <a ng-click="$emit('updateListEvent')" class="button button-icon icon ion-close"></a>
+    </div> -->
+  </div>
+    <ion-list >
+      <ion-item class="item item-input item-stacked-label" ng-class="{ 'has-error' : courseForm.courseName.$invalid && !courseForm.courseName.$pristine }">
+        <span class="input-label">Course Name*</span>
+        <input type="text" name="courseName" ng-model="course.courseName" placeholder="Research Methodologies" required>
+        <p ng-show="courseForm.courseName.$invalid && !courseForm.courseName.$pristine" class="help-block">Your Course name is required.</p>
+      </ion-item>
+      <ion-item class="item item-input item-stacked-label">
+        <span class="input-label">Course Alias</span>
+        <input type="text" name="cAlias" ng-model="course.cAlias" placeholder="IT-498">
+      </ion-item>
+      <ion-item class="item item-input item-stacked-label">
+        <span class="input-label">Instructor Name</span>
+        <input type="text" name="instructorName" ng-model="course.instructorName" placeholder="Dr. J.R Wolf">
+      </ion-item>
+      <ion-item class="item item-input item-stacked-label" ng-class="{ 'has-error' : courseForm.credits.$invalid && !courseForm.credits.$pristine }">
+      <div class="row">
+        <span class="input-label col col-50">Credit Hours*</span>
+        <select name="credits" class="ion-input-select col col-50" required ng-model="course.credits">
+          <option value=0>0</option>
+          <option value=1>1</option>
+          <option value=2>2</option>
+          <option value=3>3</option>
+          <option value=4>4</option>
+          <option value=5>5</option>
+          <option value=6>6</option>
+        </select>
+        </div>
+        <p ng-show="courseForm.credits.$invalid && !courseForm.credits.$pristine" class="help-block">Enter a valid credits.</p>
+      </ion-item>
+       <ion-item class="item item-input item-stacked-label" ng-class="{ 'has-error' : courseForm.level.$invalid && !courseForm.level.$pristine }">
+       <div class="row">
+        <span class="input-label col col-50">Course Level*</span>
+        <select name="level" class="ion-input-select col col-50" required ng-model="course.level">
+          <option value=100>100</option>
+          <option value=200>200</option>
+          <option value=300>300</option>
+          <option value=400>400</option>
+        </select>
+        </div>
+        <p ng-show="courseForm.level.$invalid && !courseForm.level.$pristine" class="help-block">Enter a valid level.</p>
+      </ion-item>
+       <ion-item class="item item-input item-stacked-label">
+        <!-- <span class="input-label">extra*</span> -->
+        <ion-toggle name="extra" ng-model="course.extra" ng-checked="course.extra.checked" toggle-class="toggle-calm">Extra credits</ion-toggle>
+      </ion-item>
+      <div class="item item-divider">
+        Course Grade Scale
+      </div>
+      <ion-item class="item item-input item-stacked-label" ng-class="{ 'has-error' : courseForm.aMin.$invalid && !courseForm.aMin.$pristine }">
+        <span class="input-label">A-Grade*</span>
+        <div class="row">
+          <div class="col col-33">100% or Higher</div>
+          <div class="col col-33"><-to-></div>
+          <div class="col col-33">
+            <input type="number"  name="aMin" ng-model="course.aMin" placeholder="90%">
+          </div>
+        </div>
+      </ion-item>
+      <ion-item class="item item-input item-stacked-label" ng-class="{ 'has-error' : courseForm.bMax.$invalid && !courseForm.bMax.$pristine || courseForm.bMin.$invalid && !courseForm.bMin.$pristine}">
+        <span class="input-label">B-Grade*</span>
+        <div class="row">
+          <div class="col col-33">
+            <input type="number"  name="bMax" ng-model="course.bMax" placeholder="89%">
+          </div>
+          <div class="col col-33"><-to-></div>
+          <div class="col col-33">
+            <input type="number"  name="bMin" ng-model="course.bMin" placeholder="80%">
+          </div>
+        </div>
+      </ion-item>
+      <ion-item class="item item-input item-stacked-label " ng-class="{ 'has-error' : courseForm.cMax.$invalid && !courseForm.cMax.$pristine || courseForm.cMin.$invalid && !courseForm.cMin.$pristine}">
+        <span class="input-label">C-Grade*</span>
+        <div class="row">
+          <div class="col col-33">
+            <input type="number"  name="cMax" ng-model="course.cMax" placeholder="79%">
+          </div>
+           <div class="col col-33"><-to-></div>
+          <div class="col col-33">
+            <input type="number"  name="cMin" ng-model="course.cMin" placeholder="70%">
+          </div>
+        </div>
+      </ion-item>
+      <ion-item class="item item-input item-stacked-label" ng-class="{ 'has-error' : courseForm.dMax.$invalid && !courseForm.dMax.$pristine || courseForm.dMin.$invalid && !courseForm.dMin.$pristine}">
+        <span class="input-label">D-Grade*</span>
+        <div class="row">
+          <div class="col col-33">
+            <input type="number"  name="dMax" ng-model="course.dMax" placeholder="69%">
+          </div>
+           <div class="col col-33"><-to-></div>
+          <div class="col col-33">
+            <input type="number"  name="dMin" ng-model="course.dMin" placeholder="60%">
+          </div>
+        </div>
+      </ion-item>
+      <ion-item class="item item-input item-stacked-label"  ng-class="{ 'has-error' : courseForm.fMax.$invalid && !courseForm.fMax.$pristine }">
+        <span class="input-label">F-Grade*</span>
+        <div class="row">
+          <div class="col col-33">
+            <input type="number"  name="fMax" ng-model="course.fMax" placeholder="59%">
+          </div>
+           <div class="col col-33"><-to-></div>
+          <div class="col col-33">
+            Lower
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+    </div>
+    
+
+      <button type="submit" class="button button-block button-energized ion-checkmark" ng-disabled="courseForm.$invalid">
+      Done
+    </button>
+    </form>
+    </ion-content>
+  </ion-modal-view>

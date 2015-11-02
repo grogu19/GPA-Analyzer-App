@@ -1,0 +1,45 @@
+<ion-view ng-controller="deliverCtrl">
+    <ion-nav-bar class="bar-positive" align-title="center">
+    
+  <ion-nav-buttons side="right">
+              <button ng-click="goBack()" class="button button-icon button-fab icon ion-android-arrow-back"></button>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+   
+  <!-- <ion-nav-view animation="slide-left-right" name="deliverable">
+    
+  </ion-nav-view> -->
+
+  <ion-tabs class="tabs-calm tabs-icon-only">
+  <ion-tab title="Dashboard" ng-click="toRubricDash($event)" icon-off="ion-ios-pulse" icon-on="ion-ios-pulse-strong">
+    <ion-nav-view animation="slide-left-right" name="tab-cDash" view-title="Dashboard">
+      <ion-content>
+        Dashboard
+      </ion-content>
+    </ion-nav-view>
+  </ion-tab>
+
+  <ion-tab title="Deliverable List" ui-sref="deliverable.deliverableList({courseId:courseId})" icon-off="ion-ios-calendar-outline" icon-on="ion-android-calendar">
+    <ion-nav-view animation="slide-left-right" name="tab-deliverable" view-title="Deliverable List">
+      <ion-content>
+        Deliverable List
+      </ion-content>
+    </ion-nav-view>
+  </ion-tab>
+
+  <ion-tab title="Rubrics" ng-click="toRubricList($event)" icon-off="ion-ios-settings" icon-on="ion-ios-settings-strong">
+    <ion-nav-view animation="slide-left-right" name="tab-rubrics" view-title="Rubrics">
+      <ion-content>
+        Rubrics
+      </ion-content>
+    </ion-nav-view>
+  </ion-tab>
+  <!-- <ion-tab title="Rubrics" ui-sref="deliverable.rubricsType({courseId:courseId})" ng-click="toRubrics($event)" icon-off="ion-ios-settings" icon-on="ion-ios-settings-strong">
+    <ion-nav-view animation="slide-left-right" name="tab-rubrics" view-title="Rubrics">
+      <ion-content>
+        Rubrics
+      </ion-content>
+    </ion-nav-view>
+  </ion-tab> -->
+</ion-tabs>
+  </ion-view>

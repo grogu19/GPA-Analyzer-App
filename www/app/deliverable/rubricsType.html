@@ -1,0 +1,66 @@
+<!-- <ion-view title="Rubrics">
+	<ion-content ng-controller="deliverCtrl">
+		<ion-list can-swipe="true">
+			
+  			<ion-item ng-if="rubrics.length == 0">
+				Press <i class="icon ion-ios-plus"></i> to add item
+			</ion-item>
+			<ion-item ng-repeat="item in rubrics" item="item" item-type="item item-icon-left" >
+				<div class="row">
+					<div class="col col-40" align="center">
+	  					{{ item.NAME }}
+	  				</div>
+	  				<div class="col col-40" align="center">
+	  					{{ item.PER_WEIGHT }}%
+	  				</div>
+	  				<div class="col col-20" align="right">
+	  					<i class="col icon ion-chevron-right"></i>
+	  				</div>
+	  				
+	  			</div>
+	  			<ion-option-button class="button-positive" ng-click="openModal(item)">Edit</ion-option-button>
+    			<ion-option-button ng-click="deleteRubrics(item)" class="button-assertive">Delete</ion-option-button>
+			</ion-item>
+		</ion-list>
+	</ion-content>
+	<div class="float-button">
+  <span class="height-fix">
+    <a ng-click="openModal()" class="content">
+      <i class="ion-plus-round"> </i>
+    </a>
+  </span>
+</div>
+</ion-view> -->
+<ion-view title="Rubrics">
+  <ion-content class="has-header" >
+       <ion-list option-buttons="itemButtons" ng-controller="deliverCtrl" can-swipe="true" pull-to-refresh="onReload()">
+			<ion-item ng-if="rubrics.length == 0">
+				Press <i class="icon ion-ios-plus"></i> to add item
+			</ion-item>
+			<!--  -->
+			<ion-item ng-repeat="item in rubrics" item="item" item-type="item item-icon-left" >
+				<div class="row">
+					<div class="col col-40" align="center">
+	  					{{ item.NAME }}
+	  				</div>
+	  				<div class="col col-40" align="center">
+	  					{{ item.PER_WEIGHT }}%
+	  				</div>
+	  				<div class="col col-20" align="right">
+	  					<i class="col icon ion-chevron-right"></i>
+	  				</div>
+	  				
+	  			</div>
+	  			<ion-option-button class="button-positive" ng-click="openEditRubricsModal('Edit',item)">Edit</ion-option-button>
+    			<ion-option-button ng-click="deleteRubrics(item)" class="button-assertive">Delete</ion-option-button>
+			</ion-item>
+		</ion-list>
+  </ion-content>
+  <div class="float-button" ng-if="weightageTotal > 0">
+  <span class="height-fix">
+    <a ng-click="openAddRubricsModal('Add')" class="content">
+      <i class="ion-plus-round"> </i>
+    </a>
+  </span>
+</div>
+</ion-view>

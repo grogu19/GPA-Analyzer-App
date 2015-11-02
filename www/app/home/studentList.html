@@ -1,0 +1,25 @@
+<ion-view title="Student List">
+	
+	<ion-content>
+		
+		<ion-list class="row responsive-sm gallery">
+
+		<ion-item ng-if="stud.length == 0">
+				Press <i class="icon ion-ios-plus"></i> to add new student
+			</ion-item>
+
+		  <ion-item class="col col-50" ng-repeat="student in stud" ui-sref="student.semester({id:student.STUDENT_ID})">
+		    {{student.F_NAME}}
+		  </ion-item>
+		</ion-list>
+		
+	</ion-content>
+	<div class="float-button">
+  <span class="height-fix">
+    <a ui-sref="home.addStudent" class="content">
+      <i class="ion-plus-circled"> </i>
+    </a>
+  </span>
+</div>
+
+</ion-view>

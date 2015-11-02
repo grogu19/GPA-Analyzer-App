@@ -1,0 +1,26 @@
+<ion-view ng-controller="courseCtrl" title="{{semName}}">
+  
+  <ion-content >
+		
+		<ion-list class="row responsive-sm gallery">
+
+			<ion-item ng-if="course.length == 0">
+				Press <i class="icon ion-ios-plus"></i> to add course
+			</ion-item>
+
+		  <ion-item class="col col-25" ng-repeat="sub in course" ui-sref="deliverable.deliverableList({courseId:sub.COURSE_ID})"><h2>{{sub.C_ALIAS}} - {{sub.COURSE_NAME}}</h2>
+		  <h4>Credit hours: {{sub.CREDIT_HOURS}}</h4>
+		  </ion-item>
+		  
+		</ion-list>
+
+	</ion-content>
+
+	<div class="float-button">
+  <span class="height-fix">
+    <a ng-controller="courseModalCtrl" ng-click="openCourseModal()" class="content">
+      <i class="ion-android-add-circle"> </i>
+    </a>
+  </span>
+</div>
+</ion-view>

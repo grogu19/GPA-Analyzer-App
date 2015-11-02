@@ -1,0 +1,36 @@
+<ion-view ng-controller="studDetailCtrl">
+<ion-nav-bar class="bar-balanced" align-title="center">
+
+	
+	<ion-nav-buttons side="right">
+              <button ng-click="goBack()" class="button button-icon button-fab icon ion-person-stalker"></button>
+    </ion-nav-buttons>
+</ion-nav-bar>
+
+
+<ion-tabs class="tabs-calm tabs-icon-only">
+	<ion-tab title="Dashboard" ng-click="toDash($event)" icon-off="ion-ios-pulse" icon-on="ion-ios-pulse-strong">
+		<ion-nav-view name="tab-dash" view-title="Dashboard">
+		  <ion-content>
+		    Dashboard
+		  </ion-content>
+		</ion-nav-view>
+	</ion-tab>
+
+	<ion-tab title="Semester" ng-click="toSem($event)" icon-off="ion-ios-calendar-outline" icon-on="ion-android-calendar">
+		<ion-nav-view name="tab-semester" view-title="Semester">
+		  <ion-content>
+		    Semester
+		  </ion-content>
+		</ion-nav-view>
+	</ion-tab>
+
+	<ion-tab title="Profile" ng-click="toProfile($event)" icon="ion-android-options">
+		<ion-nav-view name="tab-profile" view-title="Profile">
+		  <ion-content>
+		    Profile
+		  </ion-content>
+		</ion-nav-view>
+	</ion-tab>
+</ion-tabs>
+</ion-view>

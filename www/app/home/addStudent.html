@@ -1,0 +1,65 @@
+ <ion-view title="New Student"> 
+  <ion-content>
+  <form name="stuForm" ng-controller="studentCtrl" ng-submit="addStudent(stud)" novalidate>
+  <div class="list list-inset">
+  <label><h3>Personal</h3></label>
+    <ion-list >
+      <ion-item class="item item-input item-stacked-label" ng-class="{ 'has-error' : stuForm.firstName.$invalid && !stuForm.firstName.$pristine }">
+        <span class="input-label">First Name*</span>
+        <input type="text" name="firstName" ng-model="stud.firstName" placeholder="John" required>
+        <p ng-show="stuForm.firstName.$invalid && !stuForm.firstName.$pristine" class="help-block">Your first name is required.</p>
+      </ion-item>
+      <ion-item class="item item-input item-stacked-label">
+        <span class="input-label">Last Name</span>
+        <input type="text" name="lastName" ng-model="stud.lastName" placeholder="Suhr">
+      </ion-item>
+      <ion-item class="item item-input item-stacked-label" ng-class="{ 'has-error' : stuForm.email.$invalid && !stuForm.email.$pristine }">
+        <span class="input-label">Email*</span>
+        <input type="email" name="email" required ng-model="stud.email" placeholder="john@suhr.com">
+        <p ng-show="stuForm.email.$invalid && !stuForm.email.$pristine" class="help-block">Enter a valid email.</p>
+      </ion-item>
+    </ion-list>
+    <label><h3>Education</h3></label>
+      <ion-list>
+        <ion-item class="item item-input item-stacked-label" ng-class="{ 'has-error' : stuForm.schoolName.$invalid && !stuForm.schoolName.$pristine }">
+          <span class="input-label">School Name*</span>
+          <input type="text" name="schoolName" required ng-model="stud.schoolName" placeholder="Illinoi State University">
+          <p ng-show="stuForm.schoolName.$invalid && !stuForm.schoolName.$pristine" class="help-block">You school name is required.</p>
+        </ion-item>
+        <ion-item class="item item-radio item-stacked-label" ng-class="{ 'has-error' : stuForm.schoolName.$invalid && !stuForm.schoolName.$pristine }">
+          
+          <div class="item-radio">
+          <span class="input-label solid"><ion-header-bar align-title="left" class="bar-stable">Select:*</ion-header-bar></span><br><br>
+            <ion-radio name="type" ng-model="stud.type" ng-value="0" ng-required="!stud.type">Undergrad</ion-radio>
+            <ion-radio name="type" ng-model="stud.type" ng-value="1" ng-required="!stud.type">Graduate</ion-radio>
+           </div>
+           <p ng-show="stuForm.type.$invalid && !stuForm.type.$pristine" class="help-block">Your school name is required.</p>
+        </ion-item>
+        <ion-item class="item item-input item-stacked-label" ng-class="{ 'has-error' : stuForm.major.$invalid && !stuForm.major.$pristine }">
+          <span class="input-label">Major*</span>
+          <input type="text" name="major" required ng-model="stud.major" placeholder="Information Technology">
+          <p ng-show="stuForm.major.$invalid && !stuForm.major.$pristine" class="help-block">Major is required.</p>
+        </ion-item>
+        <ion-item class="item item-input item-stacked-label">
+          <span class="input-label">Minor (Optional)</span>
+          <input type="text" name="minor" ng-model="stud.minor" placeholder="Web Development">
+        </ion-item>
+        <ion-item class="item item-input item-stacked-label">
+          <span class="input-label">Start month*</span>
+          <input type="month" name="strMonth" required ng-model="stud.strMonth">
+        </ion-item>
+        <ion-item class="item item-input item-stacked-label">
+          <span class="input-label">End month</span>
+          <input type="month" ame="endMonth" ng-model="stud.endMonth">
+        </ion-item>
+      </ion-list>
+    </div>
+    
+    <button type="submit" class="button button-block button-balanced icon-right ion-arrow-right-c" ng-disabled="stuForm.$invalid">
+      Create Student
+    </button>
+    
+
+  </form>
+  </ion-content> 
+</ion-view>

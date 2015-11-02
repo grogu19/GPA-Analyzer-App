@@ -1,0 +1,45 @@
+<ion-view title="Status">
+  <ion-content class="has-header" ng-init="getCourseById()">
+       <ion-list>
+			<label>
+			 <div class="item item-divider">
+			 	{{course.COURSE_NAME}}
+			 	
+			 </div>
+
+			</label>
+  			
+			<ion-item ng-if="rubricsDash.length == 0">
+			<p>Course analytics unavailable.</p><p> Please add Deliverables to generate analytics!!</p>
+			</ion-item>
+			<ion-item>
+				
+				<div class="row">
+					<div class="col col-50" align="center">
+						<h2>Course Grade</h2>
+	  					<h3>{{course.GRADE}}</h3>
+					</div>
+	  				<div class="col col-50" align="center">
+	  					<h2>Course Percentage</h2>
+	  					<h3>{{ getCoursePercent() | number:1}}%</h3>
+	  				</div>
+	  					
+	  			</div>
+			</ion-item>
+			<ion-item ng-repeat="rubric in rubricsDash" item="item" item-type="item item-icon-left">
+				<div class="row">
+					<div class="col col-33" align="left">
+	  					{{ rubric.RUBRIC_NAME}}
+	  				</div>
+	  				<div class="col col-33" align="right">
+	  					{{ rubric.RUBRIC_SCORE }}/{{ rubric.RUBRIC_TOTAL }}
+	  				</div>
+	  				<div class="col col-33" align="right">
+	  					{{ (rubric.RUBRIC_SCORE/rubric.RUBRIC_TOTAL)*100 | number:1}}%
+	  				</div>	
+	  			</div>
+	  			
+			</ion-item>
+		</ion-list>
+  </ion-content>
+</ion-view>

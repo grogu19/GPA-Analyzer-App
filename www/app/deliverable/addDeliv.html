@@ -1,0 +1,66 @@
+<ion-modal-view>
+  
+    <div class="bar bar-header bar-dark">
+        <ion-button class="button icon-left ion-chevron-left button-clear" ng-click="closeDeliverableModal()">Cancel</ion-button>
+  		<h1 class="title">{{actionDel}} Deliverable</h1>
+	</div>
+    <ion-content class="has-header" ng-init="updateDeliverableRubrics(courseId)">
+		<form name="form" novalidate>
+    <div class="form-group">
+  <!-- Deliverable name -->
+      	<ion-item class="item item-input item-stacked-label form-group" ng-class="{ 'has-error' : form.delivName.$invalid && !form.delivName.$pristine }">
+        	<span class="input-label">Deliverable Name*</span>
+        	<input type="text" class="form-control" name="delivName" ng-model="deliv.delivName" placeholder="Quiz 1" required>
+        	<p ng-show="form.delivName.$invalid && !form.delivName.$pristine" class="help-block">Type name is required.</p>
+      	</ion-item>
+  <!-- Deliverable Type -->
+        <ion-item class="item item-input item-stacked-label" 
+                  ng-class="{ 'has-error' : form.delivType.$invalid && !form.delivType.$pristine }">
+          <span class="input-label">
+            Type*
+          </span>
+            <select class="input-block-level"
+                    name="delivType" 
+                    ng-model="deliv.delivType" 
+                    ng-options="obj.DELI_TYPE_ID as obj.NAME for obj in rubrics">    
+                <option value="">Other</option>
+            </select>
+              <p ng-show="form.delivType.$invalid && !form.delivType.$pristine" 
+                 class="help-block">
+                 Type cannot be default.
+              </p>
+        </ion-item>
+
+  <!-- Total -->
+     	  <ion-item class="item item-input item-stacked-label" ng-class="{ 'has-error' : form.delivTotal.$invalid && !form.delivTotal.$pristine }">
+        	<span class="input-label">Total</span>
+        	<input type="number" name="delivTotal" ng-model="deliv.delivTotal" placeholder="100" required>
+        	<p ng-show="form.delivTotal.$invalid && !form.delivTotal.$pristine" class="help-block">Percentage Weight is required.</p>
+      	</ion-item> 
+
+  <!-- Score -->
+        <ion-item class="item item-input item-stacked-label" ng-class="{ 'has-error' : form.delivScore.$invalid && !form.delivScore.$pristine }">
+          <span class="input-label"> Score</span>
+          <input type="number" name="delivScore" ng-model="deliv.delivScore" placeholder="95" required>
+          <p ng-show="form.delivScore.$invalid && !form.delivScore.$pristine" class="help-block">Percentage Weight is required.</p>
+        </ion-item> 
+
+     <!--  <button ng-click="addDeliverable(deliv)" class="button button-block button-energized ion-checkmark" ng-disabled="form.$invalid">Add</button> -->
+      <button ng-show="actionDel == 'Add'"  
+                class="button button-block button-positive" 
+                ng-disabled="deliForm.$invalid" 
+               ng-click="addDeliverable(deliv)">
+                Add
+        </button>
+
+        <button ng-show="actionDel == 'Edit'" 
+                class="button button-block button-positive" 
+                ng-disabled="deliForm.$invalid" 
+                ng-click="editDeliverable(deliv)">
+                Edit
+        </button>
+      </div>
+    </form>
+    </ion-content>
+    
+  </ion-modal-view>

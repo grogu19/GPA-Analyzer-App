@@ -1,0 +1,37 @@
+<ion-modal-view>
+  
+    <div class="bar bar-header bar-dark">
+        <ion-button class="button icon-left ion-chevron-left button-clear" ng-click="closeRubricsModal()">Cancel</ion-button>
+  		<h1 class="title">{{actionDel}} Rubrics</h1>
+	</div>
+    <ion-content class="has-header">
+		<form name="rubForm" novalidate>
+      	<ion-item class="item item-input item-stacked-label" ng-class="{ 'has-error' : rubForm.rubricName.$invalid && !rubForm.rubricName.$pristine }">
+        	<span class="input-label">Deliverable Type Name*</span>
+        	<input type="text" name="rubricName" ng-model="rubrics.rubricName" placeholder="Quizzes" required>
+        	<p ng-show="rubForm.rubricName.$invalid && !rubForm.rubricName.$pristine" class="help-block">Type name is required.</p>
+      	</ion-item>
+     	<ion-item class="item item-input item-stacked-label" ng-class="{ 'has-error' : rubForm.rubricWeightage.$invalid && !rubForm.rubricWeightage.$pristine }">
+        	<span class="input-label">Percentage Weight</span>
+        	<input type="number" name="rubricWeightage" ng-model="rubrics.rubricWeightage" min="1" max="{{getPer()}}" placeholder="30%" required>
+        	<p ng-show="rubForm.rubricWeightage.$invalid && !rubForm.rubricWeightage.$pristine" class="help-block">Percentage Weight is missing or exceeds {{getPer()}}</p>
+      	</ion-item> 
+
+      <!-- <button type="submit" class="button button-block button-energized ion-checkmark" ng-disabled="rubForm.$invalid">Add</button> -->
+      <button ng-show="actionDel == 'Add'"  
+                class="button button-block button-energized ion-checkmark" 
+                ng-disabled="rubForm.$invalid" 
+               ng-click="addRubric(rubrics)">
+                Add
+        </button>
+
+        <button ng-show="actionDel == 'Edit'" 
+                class="button button-block button-energized ion-checkmark" 
+                ng-disabled="rubForm.$invalid" 
+                ng-click="editRubric(rubrics)">
+                Edit
+        </button>
+      </form>
+    </ion-content>
+    
+  </ion-modal-view>

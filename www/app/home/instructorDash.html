@@ -1,0 +1,54 @@
+<ion-view view-title="{{inName}}">
+  
+
+  <ion-content id="content">
+  <form name="instForm" ng-init="searchCourse()" ng-submit="searchStu(inst)" novaidate>
+  <h5>Select course and grade</h5>
+    <ion-list>
+      <ion-item>
+        <span class="ion-input-label">
+            Course:  
+          </span>
+            <select class="ion-input-select"
+                    name="course" 
+                    ng-model="inst.course" 
+                    ng-options="obj.COURSE_NAME as obj.COURSE_NAME for obj in courseList"
+                    ng-change="searchGrade(inst.course)">    
+                
+            </select>    
+      </ion-item>
+      <ion-item>
+        <div class="row">
+          <div class="col">
+            <span class="ion-input-label">
+                Grade:
+            </span>
+          </div>
+          <div class="col">
+            <select class="ion-input-select"
+                        name="grade" 
+                        ng-model="inst.grade" 
+                        ng-options="obj.GRADE as obj.GRADE for obj in gradeList">    
+            </select>
+          </div>
+        </div> 
+      </ion-item>
+      <div align="center">
+      <button class="button button-small button-energized" type="submit">Apply Filter</button>
+      </div>
+    <form>
+    </ion-list>
+
+    <ion-list class="card">
+      <div align="center" ng-if="stuList.length>0">
+      <p>{{stuList.length}} result(s)</p>
+      </div>
+      <ion-item ng-if="stuList.length==0">
+        Nothing to display !
+      </ion-item>
+      <ion-item ng-repeat="item in stuList">
+    	{{item.F_NAME}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

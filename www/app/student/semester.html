@@ -1,0 +1,26 @@
+<ion-view title="{{student.F_NAME}}" ng-controller="studDetailCtrl">
+  <!-- <ion-content class="has-header">
+    <h1>Welcome {{studname}}</h1>
+    <p>your id is: {{studid}}</p>
+  </ion-content> -->
+  <ion-content >
+		
+		<ion-list class="row responsive-sm gallery">
+			<ion-item ng-if="sem.length == 0 && rubrics.length != 0">
+  			
+				Press <i class="icon ion-ios-plus"></i> to add Semester
+			</ion-item>
+		  <ion-item class="col col-50" ng-repeat="semester in sem" ui-sref="course.courseList({id:studid, semName:semester.SEM_NAME})">
+		    {{semester.SEM_NAME}}
+		  </ion-item>
+		</ion-list>
+
+	</ion-content>
+	<div class="float-button">
+  <span class="height-fix">
+    <a ng-controller="modalCtrl" ng-click="openModal()" class="content">
+      <i class="ion-android-add-circle"> </i>
+    </a>
+  </span>
+</div>
+</ion-view>

@@ -1,0 +1,43 @@
+<ion-view title="{{student.F_NAME}}">
+  <ion-content class="has-header">
+    <ion-list>
+    	<ion-item>
+    		<label>Name: </label>
+    		<p>{{student.F_NAME}} {{student.L_NAME}}</p>
+    	</ion-item>
+    	<ion-item>
+    		<label>Email: </label>
+    		<p>{{student.EMAIL}}</p>
+    	</ion-item>
+    	<ion-item>
+    		<label>School Name: </label>
+    		<p>{{student.SCHOOL_NAME}}</p>
+    	</ion-item>
+    	<ion-item>
+    		<label>Type: </label>
+    		
+    		<p ng-if="student.STU_TYPE==1">Graduate</p>
+    		<p ng-if="student.STU_TYPE==2">Undergraduate</p>
+    	</ion-item>
+    	<ion-item>
+    		<label>Major: </label>
+    		<p>{{student.MAJOR}}</p>
+
+    	</ion-item>
+    	<ion-item>
+    		<label>Minor: </label>
+    		<p ng-if="student.MINOR!=null || student.MINOR!=undefined">{{student.MINOR}}</p>
+    		<p ng-if="student.MINOR==null || student.MINOR==undefined">No Minor specified</p>
+    	</ion-item>
+    	<ion-item>
+    		<label>Start Date: </label>
+    		<p>{{student.START_DATE}}</p>
+    	</ion-item>
+    	<ion-item>
+    		<label>End Date: </label>
+    		<p ng-if="student.END_DATE!=null || student.END_DATE!=undefined">{{student.END_DATE}}</p>
+    		<p ng-if="student.END_DATE==null || student.END_DATE==undefined">No End Date specified</p>
+    	</ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

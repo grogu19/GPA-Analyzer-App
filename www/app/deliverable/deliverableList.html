@@ -1,0 +1,44 @@
+<ion-view title="Deliverable List" >
+	<ion-content ng-init="updateDeliverableRubrics(courseId)">
+	<ion-refresher
+	    pulling-text="Pull to refresh..."
+	    on-refresh="doRefresh()">
+	  </ion-refresher>
+		<ion-list option-buttons="itemButtons" can-swipe="true">
+			<label>
+			 <div class="item item-divider">
+			 	{{course.COURSE_NAME}}
+
+			 </div>
+
+			</label>
+  			<ion-item ng-if="rubrics.length == 0">
+  			Please add Rubrics before adding deliverables
+				Press <i class="icon ion-android-options"></i> to add rubrics
+			</ion-item>
+			<ion-item ng-if="deliverable.length == 0 && rubrics.length != 0">
+  			
+				Press <i class="icon ion-ios-plus"></i> to add Deliverables
+			</ion-item>
+			<ion-item ng-repeat="del in deliverable" item="item" item-type="item item-icon-left">
+				<div class="row">
+					<div class="col col-50" align="left">
+	  					{{ del.DELI_NAME }}
+	  				</div>
+	  				<div class="col col-50" align="right">
+	  					{{ del.SCORE }}/{{ del.TOTAL }}
+	  				</div>		
+	  			</div>
+	  			<ion-option-button class="button-positive" ng-click="openDeliverableModal('Edit',del)">Edit</ion-option-button>
+    			<ion-option-button ng-click="deleteDeliverable(del)" class="button-assertive">Delete</ion-option-button>
+			</ion-item>
+		</ion-list>
+	</ion-content>
+	<div class="float-button" ng-if="rubrics.length != 0">
+  <span class="height-fix">
+    <a ng-click="openAddDeliverableModal('Add')" class="content">
+      <i class="ion-plus-round"> </i>
+    </a>
+  </span>
+</div>
+</ion-view>

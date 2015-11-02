@@ -1,0 +1,22 @@
+<ion-view view-title="Instructor Search">
+  <div id="search-bar">
+    <div class="item item-input-inset has-header">
+      <label class="item-input-wrapper" id="search-input">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="text" placeholder="Search Instructor" ng-model="instName" ng-change="searchInst()">
+      </label>
+    </div>
+  </div>
+
+  <ion-content id="content" class="has-subheader">
+    <ion-list class="card">
+    <ion-item ng-if="instructorList.length<1">
+    	<p>Instructor missing</p>
+    	<p>Please add course and deliverables for instructor</p>
+    </ion-item>
+      <ion-item ng-repeat="item in instructorList" ui-sref="home.instructorDash({name:item.INSTRUCTOR_NAME})">
+    	{{item.INSTRUCTOR_NAME}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
