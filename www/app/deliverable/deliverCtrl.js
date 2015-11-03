@@ -8,7 +8,7 @@
   deliverCtrl.$inject = ['$stateParams','Course', '$scope','$q','$state','$ionicModal','$ionicHistory','$timeout'];
 
   function deliverCtrl($stateParams, Course, $scope, $q, $state, $ionicModal,$ionicHistory,$timeout) {
-    var vm = this;
+    
      $scope.course = [];
     $scope.course = null;
 
@@ -32,18 +32,19 @@
     console.log("$stateParams",$stateParams);
     var courseId = $stateParams.courseId;;
     var deliverable = {};
-
+    var courseSelected = [];
     $scope.getCourseById = function() {
         Course.getCourseById($stateParams.courseId).then(function(course){
           $scope.course = course;
-          console.log($scope.course);
+          courseSelected = course;
+          console.log('courseSelected',courseSelected.STUDENT_ID+"---"+courseSelected.SEM_NAME);
         });
       }
        $scope.getCourseById();
     $scope.goBack = function(){
       /*$ionicHistory.clearCache();
       $ionicHistory.goBack();*/
-      $state.go('course.courseList',{id:$scope.course.STUDENT_ID, semName:$scope.course.SEM_NAME}, {reload: true});
+      $state.go('course.courseList',{id:courseSelected.STUDENT_ID, semName:courseSelected.SEM_NAME}, {reload: true});
       
     }
 
@@ -78,10 +79,12 @@
 
     $scope.getCourseGrade = function(){
       
-      var currentCourse = $scope.course;
+      var currentCourse = courseSelected;
       var coursePercent = $scope.getCoursePercent();
       var grade =null;
       var points =null;
+      if(currentCourse!=[])
+      {
       var amin = currentCourse.A_MIN+0.001;
       var bmin = currentCourse.B_MIN+0.001;
       var bmax = currentCourse.B_MAX+0.99;
@@ -90,7 +93,7 @@
       var dmin = currentCourse.D_MIN+0.001;
       var dmax = currentCourse.D_MAX+0.99;
       var fmax = currentCourse.F_MAX+0.99;
-      console.log(currentCourse.A_MIN);
+      
           switch(true){
             case (coursePercent >= amin):
             
@@ -129,6 +132,7 @@
             
             break;
           }
+        }
         if((grade!= currentCourse.GRADE && grade!=null) || (points!= currentCourse.GRADE_POINT && points!=null)){
           Course.updateCourseGradeById($scope.course.COURSE_ID,grade,points).then(function(course){
                       $scope.course = course;
@@ -150,7 +154,7 @@
       
     }
     $scope.toDelivList = function($event) {
-      $scope.doRefresh();
+      $scope.$emit('updateRubicListEvent');
       $event.preventDefault();
       $state.go('deliverable.deliverableList', {
         courseId: $stateParams.courseId
@@ -163,6 +167,7 @@
     
        $scope.updateDeliverables(courseId);
        $scope.$emit('updateRubicListEvent');
+       $scope.updateDash();
      $timeout(function() {
        // Stop the ion-refresher from spinning
        $scope.$broadcast('scroll.refreshComplete');
@@ -194,7 +199,14 @@
       //$scope.getCourseGrade();
 
       $scope.$emit('updateRubicDashEvent');
+      $scope.updateDash();
       
+    }
+    $scope.updateDash = function() {
+      $scope.getCourseById();
+      $scope.getPer();
+      $scope.getRubricsTotal();
+      $scope.getCourseGrade();
     }
    
     $scope.getRubricsTotal();
@@ -206,10 +218,7 @@
 
       }
 
-      $scope.checkRubrics = function(){
-        $scope.updateDeliverableRubrics(courseId);
-        return $scope.rubrics.length();
-      }
+      
       $scope.deleteRubrics = function(rubric) {
          Course.removeDeliverableType(rubric).then(function(rubrics){
            $scope.rubrics = rubrics;
@@ -270,6 +279,7 @@
           $scope.closeDeliverableModal();
           $scope.updateDeliverableRubrics(courseId);
           $scope.updateDeliverables(courseId);
+
         //  $scope.getCourseGrade();
         };
       //update view on form submit
@@ -340,12 +350,14 @@
 
 
       $scope.openAddRubricsModal = function(actionDel) {
+        $scope.updateDeliverableRubrics(courseId);
         $scope.actionDel = actionDel;
         $scope.modal.show();
       };
 
       $scope.openEditRubricsModal = function(actionDel,rubrics) {
         $scope.actionDel = actionDel;
+        $scope.updateDeliverableRubrics(courseId);
         $scope.rubrics.rubricName = rubrics.NAME;
         $scope.rubrics.rubricId = rubrics.DELI_TYPE_ID;
         $scope.rubrics.rubricWeightage = rubrics.PER_WEIGHT;
@@ -374,11 +386,13 @@
 
 
       $scope.openAddDeliverableModal = function(actionDel) {
+        $scope.updateDeliverableRubrics(courseId);
         $scope.actionDel = actionDel;
         $scope.deliModal.show();
       };
       $scope.openDeliverableModal = function(actionDel,deliverable) {
         $scope.actionDel = actionDel;
+        $scope.updateDeliverableRubrics(courseId);
         $scope.deliv.delivName = deliverable.DELI_NAME;
         $scope.deliv.delivType = deliverable.DELI_TYPE_ID;
         $scope.deliv.delivTotal = deliverable.TOTAL;

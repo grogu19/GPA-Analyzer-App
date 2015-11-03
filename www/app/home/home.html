@@ -1,7 +1,9 @@
 	<ion-view>
   	<ion-nav-bar class="bar-positive" align-title="center">
   		<ion-nav-back-button class="button-clear button-icon icon ion-android-arrow-back"></ion-nav-back-button>
-	  
+	  <ion-nav-buttons side="right" ng-show="$state.current.name != 'home.welcome'">
+              <button ui-sref="home.welcome" class="button button-icon icon ion-android-home"></button>
+    </ion-nav-buttons>
 	</ion-nav-bar>
 	
 	<ion-nav-view animation="slide-left-right" name="student">

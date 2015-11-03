@@ -33,7 +33,7 @@
       }
 
     $scope.goBack = function(course){
-      var studID = course[0].STUDENT_ID;
+      var studID = $stateParams.id;
       $state.go("student.semester",{
           id:$stateParams.id
         });
@@ -80,26 +80,26 @@
   courseModalCtrl.$inject = ['$scope','$ionicModal'];
 
   function courseModalCtrl($scope,$ionicModal) {
-    $ionicModal.fromTemplateUrl('app/course/addcourse.html', {
+    $ionicModal.fromTemplateUrl('app/course/addCourse.html', {
         scope: $scope,
         animation: 'slide-in-up'
-      }).then(function(modal) {
-        $scope.modal = modal;
+      }).then(function(courseModal) {
+        $scope.courseModal = courseModal;
       });
 
 
-      $scope.openCourseModal = function(action) {
-        $scope.action = action;
-        $scope.modal.show();
+      $scope.openCourseModal = function(actionDel) {
+        $scope.actionDel = actionDel;
+        $scope.courseModal.show();
       };
       
       $scope.closeCourseModal = function() {
         $scope.$emit('updateCourseListEvent'); 
-        $scope.modal.hide();
+        $scope.courseModal.hide();
       };
       //Cleanup the modal when we're done with it!
       $scope.$on('$destroy', function() {
-        $scope.modal.remove();
+        $scope.courseModal.remove();
       });
       /*// Execute action on hide modal
       $scope.$on('modal.hidden', function() {
