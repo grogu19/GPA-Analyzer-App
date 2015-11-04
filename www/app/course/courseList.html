@@ -2,7 +2,7 @@
   
   <ion-content >
 		
-		<ion-list class="row responsive-sm gallery">
+		<ion-list class="row responsive-sm gallery" option-buttons="itemButtons" can-swipe="true">
 
 			<ion-item ng-if="course.length == 0">
 				Press <i class="icon ion-ios-plus"></i> to add course
@@ -10,6 +10,8 @@
 
 		  <ion-item class="col col-25" ng-repeat="sub in course" ui-sref="deliverable.deliverableList({courseId:sub.COURSE_ID})"><h2>{{sub.C_ALIAS}} - {{sub.COURSE_NAME}}</h2>
 		  <h4>Credit hours: {{sub.CREDIT_HOURS}}</h4>
+		  		<ion-option-button ng-controller="courseModalCtrl" class="button-positive" ng-click="openEditCourseModal('Edit',sub)">Edit</ion-option-button>
+    			<ion-option-button ng-controller="courseModalCtrl" ng-click="deleteCourse(sub)" class="button-assertive">Delete</ion-option-button>
 		  </ion-item>
 		  
 		</ion-list>

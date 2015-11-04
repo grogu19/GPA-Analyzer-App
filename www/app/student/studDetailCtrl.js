@@ -5,9 +5,9 @@
 	  .module('gpaApp.controllers')
 	  .controller('studDetailCtrl', studDetailCtrl);
 
-	studDetailCtrl.$inject = ['$stateParams','$ionicHistory','Semester', '$scope','$state','$ionicModal','$ionicNavBarDelegate','Student'];
+	studDetailCtrl.$inject = ['$stateParams','$ionicHistory','Semester', '$scope','$state','$ionicModal','$ionicNavBarDelegate','Student','$timeout'];
 
-	function studDetailCtrl($stateParams, $ionicHistory, Semester, $scope, $state, $ionicModal, $ionicNavBarDelegate,Student) {
+	function studDetailCtrl($stateParams, $ionicHistory, Semester, $scope, $state, $ionicModal, $ionicNavBarDelegate,Student,$timeout) {
 		var vm = this;
 		$scope.student = [];
 		$scope.student = null;
@@ -17,7 +17,7 @@
 
 		$scope.gpaList = [];
 		$scope.cgpaList = [];
-		
+		$scope.strtDate = null;
 
 		$scope.studname =$stateParams.name;
 		$scope.studid = $stateParams.id;
@@ -54,6 +54,8 @@
 										id: $stateParams.id
 										});
 			$scope.getStudentById($stateParams.id);
+			$scope.getGpaBySemester();
+       		$scope.getCgpa();
 
 		}
 
@@ -61,6 +63,9 @@
 			if(studId!=null){
 		        Student.getStudentById(studId).then(function(student){
 		          $scope.student = student;
+		          $scope.strtDate = new Date(student.START_DATE).getTime();
+		        	if(student.END_DATE!=null || student.END_DATE!=undefined)
+		        	$scope.endDate = new Date(student.END_DATE).getTime();
 		          	$scope.getCgpa();
 					$scope.getGpaBySemester();
 		        });
@@ -80,11 +85,18 @@
 
 		  $scope.addSem = function(sem) {
 		  	var year = new Date(sem.year);
+		  	if(!angular.isDate(year) || sem.session==undefined)
+		  	{
+		  		alert("Cannot submit empty form");
+		  	}
+		  	else
+		  	{
 		  	var session=sem.session+" "+year.getFullYear();
 		    Semester.add(session,id);
 		    
 		    $scope.$emit('updateSemListEvent');
 		    $scope.closeModal();
+			}
 		  }
 
 		  $scope.$on('updateSemListEvent', function(event) {
@@ -101,18 +113,27 @@
       	}
 
       	$scope.getGpaBySemester = function() {
-	         Semester.getSemCoursesGrade($scope.student.STUDENT_ID).then(function(gpaList){
+	         Semester.getSemCoursesGrade($scope.studid).then(function(gpaList){
 	           $scope.gpaList = gpaList;
 	         });
             console.log("sem grades",$scope.gpaList);
       	}
       	
       	$scope.getCgpa = function(){
-      		Semester.getAllCoursesGrade($scope.student.STUDENT_ID).then(function(cgpaList){
+      		Semester.getAllCoursesGrade($scope.studid).then(function(cgpaList){
 	           $scope.cgpaList = cgpaList;
 	         });
 	      	console.log("cgpa",$scope.cgpaList);	
       	}
+
+      	$scope.doStuRefresh = function() {
+    		$scope.getGpaBySemester();
+       		$scope.getCgpa();
+	     $timeout(function() {
+	       // Stop the ion-refresher from spinning
+	       $scope.$broadcast('scroll.refreshComplete');
+	     },1250);
+	    }
 	}	
 })();
 (function() {

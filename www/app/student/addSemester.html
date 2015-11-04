@@ -4,22 +4,27 @@
       <button class="button button-clear icon ion-close-round" ng-click="closeModal()"></button>
     </ion-header-bar>
     <ion-content class="modal-body">
-    <form name="semForm" ng-controller="studDetailCtrl" ng-submit="addSem(sem)" novalidate>
-      <div class="list">
-        <label class="item item-radio">
-          <span class="input-label">Session:</span>
-          <ion-radio ng-model="sem.session" ng-value="'SPRING'">Spring</ion-radio>
-          <ion-radio ng-model="sem.session" ng-value="'SUMMER'">Summer</ion-radio>
-          <ion-radio ng-model="sem.session" ng-value="'FALL'">Fall</ion-radio>
-          
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Year</span>
-          <input type="month" ng-model="sem.year">
-        </label>
-      </div>
+    <form name="semForm" ng-controller="studDetailCtrl" novalidate>
+      <ion-list>
+        <ion-item class="item  item-stacked-label" ng-class="{ 'has-error' : semForm.session.$invalid && !semForm.session.$pristine }">
+            <span class="input-label">Session:(Select one)</span>
+            <ion-radio name="session" ng-model="sem.session" ng-value="'SPRING'" ng-required="!sem.session">Spring</ion-radio>
+            <ion-radio name="session" ng-model="sem.session" ng-value="'SUMMER'" ng-required="!sem.session">Summer</ion-radio>
+            <ion-radio name="session" ng-model="sem.session" ng-value="'FALL'" ng-required="!sem.session">Fall</ion-radio>
+            <p ng-show="semForm.session.$invalid && !semForm.session.$pristine" class="help-block">Please select a session! </p>
+        </ion-item>
+        <ion-item class="item item-stacked-label" ng-class="{ 'has-error' : semForm.year.$invalid && !semForm.year.$pristine }">
+            <span class="input-label">Year</span>
+            <input name="year" type="month" ng-min="{{student.START_DATE}}" ng-model="sem.year" required>
+            <p ng-show="semForm.year.$invalid && !semForm.year.$pristine" class="help-block">Year cannot be before start date -{{strtDate | date:'MMM yyyy'}}</p>
+        </ion-item>
+      </ion-list>
 
-      <button class="button button-full button-energized" type="submit">Done</button>
-      </form>
-    </ion-content>
-  </ion-modal-view>
+      <button class="button button-block button-energized ion-checkmark" 
+                  ng-disabled="semForm.$invalid" 
+                 ng-click="addSem(sem)">
+                  Add
+      </button>
+    </form>
+  </ion-content>
+</ion-modal-view>

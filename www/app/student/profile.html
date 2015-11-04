@@ -26,16 +26,16 @@
     	</ion-item>
     	<ion-item>
     		<label>Minor: </label>
-    		<p ng-if="student.MINOR!=null || student.MINOR!=undefined">{{student.MINOR}}</p>
+    		<p ng-if="student.MINOR!=null || student.MINOR!=undefined">{{student.MINOR }}</p>
     		<p ng-if="student.MINOR==null || student.MINOR==undefined">No Minor specified</p>
     	</ion-item>
     	<ion-item>
-    		<label>Start Date: </label>
-    		<p>{{student.START_DATE}}</p>
+    		<label>Start Date</label>
+    		<p>{{strtDate | date:'MMM yyyy'}}</p>
     	</ion-item>
     	<ion-item>
     		<label>End Date: </label>
-    		<p ng-if="student.END_DATE!=null || student.END_DATE!=undefined">{{student.END_DATE}}</p>
+    		<p ng-if="student.END_DATE!=null || student.END_DATE!=undefined">{{endDate | date:'MMM yyyy'}}</p>
     		<p ng-if="student.END_DATE==null || student.END_DATE==undefined">No End Date specified</p>
     	</ion-item>
     </ion-list>

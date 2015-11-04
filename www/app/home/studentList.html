@@ -9,7 +9,7 @@
 			</ion-item>
 
 		  <ion-item class="col col-50" ng-repeat="student in stud" ui-sref="student.semester({id:student.STUDENT_ID})">
-		    {{student.F_NAME}}
+		    {{student.F_NAME}} <span ng-show="student.L_NAME!=undefined">{{student.L_NAME}}</span>
 		  </ion-item>
 		</ion-list>
 		

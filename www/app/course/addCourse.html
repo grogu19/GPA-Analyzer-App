@@ -1,11 +1,11 @@
 <ion-modal-view>
     <ion-header-bar class="bar bar-header bar-calm">
-      <h1 class="title">Add Course</h1>
+      <h1 class="title">{{actionDel}} Course</h1>
       <button class="button button-clear icon ion-close-round" ng-click="closeCourseModal()"></button>
     </ion-header-bar>
 
     <ion-content class="modal-body">
-<form name="courseForm" ng-controller="courseCtrl" ng-submit="addCourses(course)" novalidate>
+<form name="courseForm" ng-controller="courseCtrl" novalidate>
   <div class="list list-inset">
   <div class="item item-divider">
     Course Details
@@ -123,9 +123,22 @@
     </div>
     
 
-      <button type="submit" class="button button-block button-energized ion-checkmark" ng-disabled="courseForm.$invalid">
+      <!-- <button type="submit" class="button button-block button-energized ion-checkmark" ng-disabled="courseForm.$invalid">
       Done
-    </button>
+    </button> -->
+    <button ng-show="actionDel == 'Add'"  
+                class="button button-block button-positive" 
+                ng-disabled="courseForm.$invalid" 
+               ng-click="addCourses(course)">
+                Add
+        </button>
+
+        <button ng-show="actionDel == 'Edit'" 
+                class="button button-block button-positive" 
+                ng-disabled="courseForm.$invalid" 
+                ng-click="editCourses(course)">
+                Edit
+        </button>
     </form>
     </ion-content>
   </ion-modal-view>

@@ -1,5 +1,10 @@
 <ion-view title="{{student.F_NAME}}" >
-  <ion-content class="has-header" ng-init="getSemGpaList()">
+  <ion-content class="has-header" ng-init="doStuRefresh()">
+
+  <ion-refresher
+	    pulling-text="Pull to refresh..."
+	    on-refresh="doStuRefresh()">
+	  </ion-refresher>
     <ion-list>
 			
   			
